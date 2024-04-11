@@ -1,0 +1,84 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import DeepakTextInput from './src/Components/DeepakTextInput'
+import DeepakButton from './src/Components/DeepakButton'
+import DeepakBottomNav from './src/Components/DeepakBottomNav'
+import Screen1 from './src/Screens/Screen1'
+import Screen2 from './src/Screens/Screen2'
+import Screen3 from './src/Screens/Screen3'
+import Screen4 from './src/Screens/Screen4'
+
+const App = () => {
+  const [name, setName] = useState("")
+  const [selectedTab, setSelectedTab] = useState(0)
+
+  return (
+    <View style={styles.Container}>
+      {selectedTab === 0 ? <Screen1 /> : selectedTab === 1 ? <Screen2 /> : selectedTab === 2 ? <Screen3 /> : <Screen4 />}
+
+      <DeepakTextInput
+        placeholder={'Enter Name'}
+        width={"90%"}
+        height={50}
+        border={1}
+        borderColor={"#9e9e9e"}
+        color="black"
+        bg="white"
+        size={16}
+        length={50}
+        keyBoardType={'default'}
+        value={name}
+        borderRadius={10}
+        onChangeText={txt => {
+          setName(txt)
+        }}
+      />
+      <DeepakButton width="50%" />
+      <DeepakBottomNav
+        tabs={[
+          {
+            icon: require("../npm/src/Assets/home.jpeg"),
+            activeIcon: require('../npm/src/Assets/new/newhome.jpeg'),
+            title: 'Home',
+            size: 30,
+            fontSize: 14
+          },
+          {
+            icon: require("../npm/src/Assets/p3.jpeg"),
+            activeIcon: require('../npm/src/Assets/new/colorpro.jpeg'),
+            title: 'Search',
+            size: 30,
+            fontSize: 14
+          },
+          {
+            icon: require("../npm/src/Assets/search.jpeg"),
+            activeIcon: require('../npm/src/Assets/new/newsearch.jpeg'),
+            title: 'Setting',
+            size: 30,
+            fontSize: 14
+          },
+          {
+            icon: require("../npm/src/Assets/setting.jpeg"),
+            activeIcon: require('../npm/src/Assets/new/newsetting.jpeg'),
+            title: 'Profile',
+            size: 30,
+            fontSize: 14
+          },
+        ]}
+        onSelected={index => {
+          setSelectedTab(index);
+        }}
+        bg={"gray"} height={70} />
+    </View>
+  )
+}
+
+export default App
+
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})
